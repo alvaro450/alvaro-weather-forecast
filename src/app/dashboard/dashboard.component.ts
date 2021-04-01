@@ -44,6 +44,8 @@ export class DashboardComponent implements OnInit {
         tap(weatherResult => {
           if (weatherResult !== null) {
             this.locations.push(weatherResult);
+            // clear the input after a successful add
+            this.locationFormGroup.reset();
             this._cdr.markForCheck();
           }
         })

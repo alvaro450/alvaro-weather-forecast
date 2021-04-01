@@ -1,3 +1,20 @@
-.flex-container {
-  display: flex;
+:host {
+  display: block;
+  margin: 25px 0;
+  width: 100%;
+
+  .flex-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .weather-info-header {
+    justify-content: space-between;
+  }
+  .remove-button{
+        position: relative;
+    top: -30px;
+    right: -25px;
+  }
 }
