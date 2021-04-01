@@ -1,10 +1,10 @@
-export interface WeatherForecastMain {
+export interface WeatherForecastResponseMain {
   temp: number;
   temp_max: number;
   temp_min: number;
 }
 
-export interface WeatherForecastWeather {
+export interface WeatherForecastResponseWeather {
   main: string;
   id: number;
   description: string;
@@ -13,6 +13,6 @@ export interface WeatherForecastWeather {
 
 export interface WeatherForecastResponse {
   name: string;
-  main: WeatherForecastMain;
-  weather: WeatherForecastWeather[];
+  main: WeatherForecastResponseMain;
+  weather: WeatherForecastResponseWeather[];
 }
