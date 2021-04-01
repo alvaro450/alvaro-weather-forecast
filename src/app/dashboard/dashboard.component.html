@@ -13,3 +13,7 @@
     </form>
   </mat-card-content>
 </mat-card>
+
+<ng-container *ngFor="let location of locations; trackBy: trackByZipcode">
+  <weather-info [weatherResult]="location" (remove)="deleteLocation($event)"></weather-info>
+</ng-container>

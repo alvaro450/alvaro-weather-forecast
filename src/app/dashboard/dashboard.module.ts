@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { WeatherInfoModule } from './weather-info/weather-info.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatInputModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    WeatherInfoModule
   ],
   declarations: [DashboardComponent],
   providers: []

@@ -23,7 +23,7 @@ export class WeatherForecastService {
       )
       .pipe(
         map(weatherResponse => {
-          return new WeatherResult(weatherResponse);
+          return new WeatherResult(weatherResponse, zipcode);
         })
       );
   }

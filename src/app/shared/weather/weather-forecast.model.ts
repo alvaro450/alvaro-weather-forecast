@@ -20,13 +20,18 @@ export class WeatherResult {
   city: string;
   temperature: Temperature;
   weatherCollection: WeatherData[];
+  zipcode: string;
 
-  constructor(weatherForecastResponse: WeatherForecastResponse) {
+  constructor(
+    weatherForecastResponse: WeatherForecastResponse,
+    zipcode: string
+  ) {
     const { name, main, weather } = weatherForecastResponse;
 
     this.city = name;
     this.temperature = this._mapTemperature(main);
     this.weatherCollection = weather.map(w => this._mapWeather(w));
+    this.zipcode = zipcode;
   }
 
   private _mapTemperature(main: WeatherForecastResponseMain): Temperature {

@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     CommonModule
   ],
-  declarations: [WeatherInfoComponent]
+  declarations: [WeatherInfoComponent],
+  exports: [WeatherInfoComponent]
 })
 export class WeatherInfoModule { }

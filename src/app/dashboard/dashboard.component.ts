@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { switchMap, take } from "rxjs/operators";
+import { switchMap, take, tap } from "rxjs/operators";
 import { WeatherResult } from "../shared/weather/weather-forecast.model";
 import { WeatherLocationService } from "./weather-location.service";
 
@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
+    private _cdr: ChangeDetectorRef,
     private _weatherLocationService: WeatherLocationService
   ) {}
 
@@ -27,7 +28,8 @@ export class DashboardComponent implements OnInit {
       zipcode: ["", Validators.required]
     });
 
-    this.locations = Array.from(this._weatherLocationService.locationsMap.values());
+    this.locations = [...this._weatherLocationService.getStoredLocations()];
+    
   }
 
   ngOnDestroy() {
@@ -37,7 +39,23 @@ export class DashboardComponent implements OnInit {
   addLocation() {
     this._weatherLocationService
       .addLocation(this.locationFormGroup.controls.zipcode.value)
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        tap(weatherResult => {
+          if (weatherResult !== null) {
+            this.locations.push(weatherResult);
+            this._cdr.markForCheck();
+          }
+        })
+      )
       .subscribe();
+  }
+
+  deleteLocation(zipcode: string) {
+    this.locations = [...this._weatherLocationService.deleteLocation(zipcode)];
+  }
+
+  trackByZipcode(index, item: WeatherResult) {
+    return item.zipcode;
   }
 }

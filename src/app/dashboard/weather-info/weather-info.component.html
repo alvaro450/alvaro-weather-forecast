@@ -1,15 +1,21 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{weatherResult.city}}</mat-card-title>
+    <button matFabButton type="button" (click)="removeWeatherInfo(weatherResult.zipcode)"> X </button>
   </mat-card-header>
-  
-  <mat-card-content>
-    <h2>Enter a zipcode</h2>
-    <form [formGroup]="locationFormGroup">
-      <mat-form-field>
-        <input matInput type="text" formControlName="zipcode" placeholder="zipcode"/>
-      </mat-form-field>
-      <button type="button" mat-button color="primary" (click)="addLocation()">Add Location </button>
-    </form>
+
+  <mat-card-content class="flex-container">
+    <div>
+      <div>Condition: {{ weatherResult.weatherCollection[0].description}}</div>
+      <div>
+        Temperature: {{weatherResult.temperature.current}}
+      </div>
+      <div>
+        Max Temp: {{ weatherResult.temperature.max }}, Min Temp: {{weatherResult.temperature.min}}
+      </div>
+    </div>
+    <div>
+      <img alt="weather image" [src]="weatherResult.weatherCollection[0].image" />
+    </div>
   </mat-card-content>
 </mat-card>
