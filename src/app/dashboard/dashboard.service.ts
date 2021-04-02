@@ -1,13 +1,13 @@
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { tap } from "rxjs/operators";
-import { LocalStorageService } from "../shared/local-storage.service";
-import { WeatherResult } from "../shared/weather/weather-forecast.model";
-import { WeatherForecastService } from "../shared/weather/weather-forecast.service";
+import { LocalStorageService } from "../shared/services/local-storage.service";
+import { WeatherResult } from "../shared/models/weather-forecast.model";
+import { WeatherForecastService } from "../shared/services/weather-forecast.service";
 
-const WEATHER_STORAGE_KEY = "alvaro::weather::key";
 @Injectable({ providedIn: "root" })
-export class WeatherLocationService {
+export class DashboardService {
+  private _storageKey = "alvaro::weather::key";
   private _uniqueLocations = new Set<string>();
   private _locations: WeatherResult[] = [];
 
@@ -27,22 +27,24 @@ export class WeatherLocationService {
       tap(weatherResult => {
         this._locations.push(weatherResult);
         // store the updated locations in local storage
-        this._localStorageService.set(WEATHER_STORAGE_KEY, this._locations);
+        this._localStorageService.set(this._storageKey, this._locations);
       })
     );
   }
 
   deleteLocation(zipcode: string) {
-    this._locations = this._locations.filter(location => location.zipcode !== zipcode);
+    this._locations = this._locations.filter(
+      location => location.zipcode !== zipcode
+    );
     this._uniqueLocations.delete(zipcode);
-    this._localStorageService.set(WEATHER_STORAGE_KEY, this._locations);
+    this._localStorageService.set(this._storageKey, this._locations);
 
     return this._locations;
   }
 
   getStoredLocations() {
     const storedLocations = this._localStorageService.get(
-      WEATHER_STORAGE_KEY
+      this._storageKey
     ) as WeatherResult[];
     if (!!storedLocations) {
       // populate the private properties
