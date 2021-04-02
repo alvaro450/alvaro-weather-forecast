@@ -9,10 +9,11 @@ const ROUTES: Routes = [
     loadChildren: () =>
       import("./dashboard/dashboard.module").then(m => m.DashboardModule)
   },
-  // {
-  //     path: 'forecast/:id',
-  //     loadChildren: () => import('./forecast/forecast.module').then(m => m.ForecastModule)
-  // },
+  {
+    path: "forecast/:id",
+    loadChildren: () =>
+      import("./forecast/forecast.module").then(m => m.ForecastModule)
+  },
   { path: "**", redirectTo: "/dashboard", pathMatch: "full" }
 ];
 
