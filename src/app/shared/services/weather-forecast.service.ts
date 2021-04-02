@@ -2,10 +2,9 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { WEATHER_API_KEY } from "./weather-api.constants";
-import { WEATHER_API } from "./weather-api.constants";
-import { WeatherForecastResponse } from "./weather-forecast-response.interfaces";
-import { WeatherResult } from "./weather-forecast.model";
+import { WEATHER_API_KEY, WEATHER_API } from "../constants/api.constants";
+import { WeatherForecastResponse } from "../models/weather-forecast-response.interfaces";
+import { WeatherResult } from "../models/weather-forecast.model";
 
 @Injectable({
   providedIn: "root"

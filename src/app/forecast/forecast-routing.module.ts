@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
+import { ForecastComponent } from './forecast.component';
 
 const ROUTES: Routes = [{
   path: '',
-  component: DashboardComponent
+  component: ForecastComponent
 }];
 
 
@@ -17,4 +17,4 @@ const ROUTES: Routes = [{
   exports: [RouterModule],
   declarations: []
 })
-export class DashboardRoutingModule { }
+export class ForecastRoutingModule { }

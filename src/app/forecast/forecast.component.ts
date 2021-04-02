@@ -1,4 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Router
+} from "@angular/router";
 
 @Component({
   selector: "app-forecast",
@@ -7,7 +12,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForecastComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
+    private _activatedRouteSnapshot: ActivatedRouteSnapshot
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._activatedRoute.params.subscribe({ next: p => console.log(p) });
+  }
 }
