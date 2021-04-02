@@ -6,12 +6,12 @@
 
   <mat-card-content class="flex-container">
     <div>
-      <div>Condition: {{ weatherResult.weatherCollection[0].description}}</div>
+      <div><strong>Current condition:</strong> {{ weatherResult.weatherCollection[0].description}}</div>
       <div>
-        Temperature: {{weatherResult.temperature.current}}
+        <strong>Temperature:</strong> {{weatherResult.temperature.current}}
       </div>
       <div>
-        Max Temp: {{ weatherResult.temperature.max }}, Min Temp: {{weatherResult.temperature.min}}
+        <strong>Max today:</strong> {{ weatherResult.temperature.max }}, <strong>Min today:</strong> {{weatherResult.temperature.min}}
       </div>
     </div>
     <div>

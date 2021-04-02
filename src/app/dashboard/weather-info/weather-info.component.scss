@@ -2,7 +2,6 @@
   display: block;
   margin: 25px 0;
   width: 100%;
-
   .flex-container {
     display: flex;
     width: 100%;
@@ -13,9 +12,12 @@
   }
   .weather-info-header {
     justify-content: space-between;
+    ::ng-deep .mat-card-header-text {
+      margin: 0;
+    }
   }
-  .remove-button{
-        position: relative;
+  .remove-button {
+    position: relative;
     top: -30px;
     right: -25px;
   }
