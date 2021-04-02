@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { switchMap, take, tap } from "rxjs/operators";
-import { WeatherResult } from "../shared/weather/weather-forecast.model";
+import { WeatherResult } from "../shared/models/weather-forecast.model";
 import { WeatherLocationService } from "./weather-location.service";
 
 @Component({

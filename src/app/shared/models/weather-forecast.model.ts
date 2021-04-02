@@ -1,4 +1,4 @@
-import { weatherForecastImageMapping } from "./weather-forecast-image.enum";
+import { weatherForecastImageMapping } from "../constants/images.constants";
 import {
   WeatherForecastResponseMain,
   WeatherForecastResponse,
