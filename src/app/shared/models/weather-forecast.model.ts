@@ -1,3 +1,4 @@
+import { IMAGE_URL_BASE } from "../constants/api.constants";
 import { weatherForecastImageMapping } from "../constants/images.constants";
 import {
   WeatherForecastResponseMain,
@@ -44,7 +45,9 @@ export class WeatherResult {
 
   private _mapWeather(weather: WeatherForecastResponseWeather): WeatherData {
     return {
-      image: weatherForecastImageMapping.get(weather.main),
+      image: `${IMAGE_URL_BASE}${weatherForecastImageMapping.get(
+        weather.main
+      )}`,
       description: weather.description
     };
   }
