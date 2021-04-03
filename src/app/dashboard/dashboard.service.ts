@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { tap } from "rxjs/operators";
 import { LocalStorageService } from "../shared/services/local-storage.service";
-import { WeatherResult } from "../shared/models/weather-forecast.model";
-import { WeatherForecastService } from "../shared/services/weather-forecast.service";
+import { WeatherResult } from "../shared/models/weather.model";
+import { WeatherApiService } from "../shared/services/weather-api.service";
 
 @Injectable({ providedIn: "root" })
 export class DashboardService {
@@ -12,7 +12,7 @@ export class DashboardService {
   private _locations: WeatherResult[] = [];
 
   constructor(
-    private _weatherForecaseService: WeatherForecastService,
+    private _weatherApiService: WeatherApiService,
     private _localStorageService: LocalStorageService
   ) {}
 
@@ -23,7 +23,7 @@ export class DashboardService {
 
     this._uniqueLocations.add(zipcode);
 
-    return this._weatherForecaseService.getWeatherByZipCode(zipcode).pipe(
+    return this._weatherApiService.getWeatherByZipCode(zipcode).pipe(
       tap(weatherResult => {
         this._locations.push(weatherResult);
         // store the updated locations in local storage

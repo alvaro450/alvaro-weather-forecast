@@ -14,7 +14,7 @@ import { WeatherResult } from "../models/weather.model";
 @Injectable({
   providedIn: "root"
 })
-export class WeatherForecastService {
+export class WeatherApiService {
   constructor(private _httpClient: HttpClient) {}
 
   getWeatherByZipCode(
