@@ -14,11 +14,11 @@ import {
 export class ForecastComponent implements OnInit {
   constructor(
     private _router: Router,
-    private _activatedRoute: ActivatedRoute,
-    private _activatedRouteSnapshot: ActivatedRouteSnapshot
+    private _activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this._activatedRoute.params.subscribe({ next: p => console.log(p) });
+    const { zipcode } = this._activatedRoute.snapshot.params;
+    
   }
 }

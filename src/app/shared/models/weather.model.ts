@@ -1,10 +1,10 @@
 import { IMAGE_URL_BASE } from "../constants/api.constants";
 import { weatherForecastImageMapping } from "../constants/images.constants";
+import { WeatherApiData, WeatherApiTemperature } from "../interfaces/weather-api-base-response.interface";
 import {
-  WeatherForecastResponseMain,
-  WeatherForecastResponse,
-  WeatherForecastResponseWeather
-} from "./weather-forecast-response.interfaces";
+  WeatherApiResponse
+} from "../interfaces/weather-api-response.interfaces";
+
 
 export interface Temperature {
   current: number;
@@ -23,11 +23,8 @@ export class WeatherResult {
   weatherCollection: WeatherData[];
   zipcode: string;
 
-  constructor(
-    weatherForecastResponse: WeatherForecastResponse,
-    zipcode: string
-  ) {
-    const { name, main, weather } = weatherForecastResponse;
+  constructor(weatherApiResponse: WeatherApiResponse, zipcode: string) {
+    const { name, main, weather } = weatherApiResponse;
 
     this.city = name;
     this.temperature = this._mapTemperature(main);
@@ -35,7 +32,7 @@ export class WeatherResult {
     this.zipcode = zipcode;
   }
 
-  private _mapTemperature(main: WeatherForecastResponseMain): Temperature {
+  private _mapTemperature(main: WeatherApiTemperature): Temperature {
     return {
       current: main.temp,
       max: main.temp_max,
@@ -43,7 +40,7 @@ export class WeatherResult {
     };
   }
 
-  private _mapWeather(weather: WeatherForecastResponseWeather): WeatherData {
+  private _mapWeather(weather: WeatherApiData): WeatherData {
     return {
       image: `${IMAGE_URL_BASE}${weatherForecastImageMapping.get(
         weather.main
