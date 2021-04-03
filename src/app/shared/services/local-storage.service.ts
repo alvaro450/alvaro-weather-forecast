@@ -1,3 +1,4 @@
+import { NgIf } from "@angular/common";
 import { Injectable } from "@angular/core";
 
 @Injectable({providedIn: 'root'})
@@ -6,7 +7,10 @@ export class LocalStorageService {
 
   get(key: string) {
     const stringifyItem = localStorage.getItem(key);
-    return JSON.parse(stringifyItem);
+    if(stringifyItem !== null) {
+      return JSON.parse(stringifyItem);
+    } 
+    return null;
   }
 
   set<T>(key: string, value: T) {

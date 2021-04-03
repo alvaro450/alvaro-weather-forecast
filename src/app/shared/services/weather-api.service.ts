@@ -9,6 +9,7 @@ import {
 } from "../constants/api.constants";
 import { ForecastApiResponse } from "../interfaces/forecast-api-response.interfaces";
 import { WeatherApiResponse } from "../interfaces/weather-api-response.interfaces";
+import { ForecastResult } from "../models/forecast.model";
 import { WeatherResult } from "../models/weather.model";
 
 @Injectable({
@@ -39,7 +40,7 @@ export class WeatherApiService {
       )
       .pipe(
         map(forecastResponse => {
-          return new ForecastResult(forecastResponse, zipcode);
+          return new ForecastResult();
         })
       );
   }

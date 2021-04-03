@@ -16,7 +16,7 @@ export class DashboardService {
     private _localStorageService: LocalStorageService
   ) {}
 
-  addLocation(zipcode: string): Observable<WeatherResult> {
+  addLocation(zipcode: string): Observable<WeatherResult | null> {
     if (this._uniqueLocations.has(zipcode)) {
       return of(null);
     }

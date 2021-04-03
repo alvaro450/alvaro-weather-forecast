@@ -18,7 +18,7 @@ import { DashboardService } from "./dashboard.service";
 })
 export class DashboardComponent implements OnInit {
   locationFormGroup!: FormGroup;
-  locations: WeatherResult[];
+  locations!: WeatherResult[];
 
   private _subscriptions = new Subscription();
 
@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
     this.locations = [...this._dashboardService.deleteLocation(zipcode)];
   }
 
-  trackByZipcode(index, item: WeatherResult) {
+  trackByZipcode(index: number, item: WeatherResult) {
     return item.zipcode;
   }
 }
