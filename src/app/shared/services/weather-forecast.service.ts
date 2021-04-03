@@ -2,7 +2,12 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { WEATHER_API_KEY, WEATHER_API, FORECAST_API } from "../constants/api.constants";
+import {
+  WEATHER_API_KEY,
+  WEATHER_API,
+  FORECAST_API
+} from "../constants/api.constants";
+import { ForecastApiResponse } from "../interfaces/forecast-api-response.interfaces";
 import { WeatherApiResponse } from "../interfaces/weather-api-response.interfaces";
 import { WeatherResult } from "../models/weather.model";
 
@@ -14,7 +19,7 @@ export class WeatherForecastService {
 
   getWeatherByZipCode(
     zipcode: string,
-    countryCode = 'us'
+    countryCode = "us"
   ): Observable<WeatherResult> {
     return this._httpClient
       .get<WeatherApiResponse>(
@@ -27,14 +32,14 @@ export class WeatherForecastService {
       );
   }
 
-  getFiveDayForecastByZipCode(zipcode: string, countryCode = 'us') {
+  getFiveDayForecastByZipCode(zipcode: string, countryCode = "us") {
     return this._httpClient
-      .get(
+      .get<ForecastApiResponse>(
         `${FORECAST_API}?zip=${zipcode},${countryCode}&units=imperial&appid=${WEATHER_API_KEY}`
       )
       .pipe(
-        map(weatherResponse => {
-          return new WeatherResult(weatherResponse, zipcode);
+        map(forecastResponse => {
+          return new ForecastResult(forecastResponse, zipcode);
         })
       );
   }

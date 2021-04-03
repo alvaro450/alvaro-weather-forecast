@@ -7,7 +7,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { take, tap } from "rxjs/operators";
-import { WeatherResult } from "../shared/models/weather-forecast.model";
+import { WeatherResult } from "../shared/models/weather.model";
 import { DashboardService } from "./dashboard.service";
 
 @Component({

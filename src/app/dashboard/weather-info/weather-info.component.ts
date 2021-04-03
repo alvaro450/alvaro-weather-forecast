@@ -6,7 +6,7 @@ import {
   EventEmitter,
   Output
 } from "@angular/core";
-import { WeatherResult } from "../../shared/models/weather-forecast.model";
+import { WeatherResult } from "../../shared/models/weather.model";
 
 @Component({
   selector: "weather-info",
