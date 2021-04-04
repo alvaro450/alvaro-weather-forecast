@@ -6,7 +6,8 @@ import {
   EventEmitter,
   Output
 } from "@angular/core";
-import { WeatherResult } from "../../shared/models/weather.model";
+import { WeatherApiResponse } from "../../core/interfaces/weather-api-response.interfaces";
+import { WeatherResult } from "../../core/models/weather.model";
 
 @Component({
   selector: "weather-info",
@@ -15,13 +16,21 @@ import { WeatherResult } from "../../shared/models/weather.model";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WeatherInfoComponent implements OnInit {
-  @Input() weatherResult!: WeatherResult;
+  @Input() weatherResult!: WeatherResult<WeatherApiResponse>;
   @Output() remove = new EventEmitter<string>();
+  @Output() forecast = new EventEmitter<string>();
+
   constructor() {}
 
   ngOnInit() {}
 
   removeWeatherInfo(zipcode: string) {
     this.remove.next(zipcode);
+  }
+
+  forecastInfo($event: MouseEvent, zipcode: string) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.forecast.next(zipcode);
   }
 }

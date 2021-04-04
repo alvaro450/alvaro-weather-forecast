@@ -5,9 +5,11 @@ import {
   OnInit
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { take, tap } from "rxjs/operators";
-import { WeatherResult } from "../shared/models/weather.model";
+import { WeatherApiResponse } from "../core/interfaces/weather-api-response.interfaces";
+import { WeatherResult } from "../core/models/weather.model";
 import { DashboardService } from "./dashboard.service";
 
 @Component({
@@ -18,13 +20,14 @@ import { DashboardService } from "./dashboard.service";
 })
 export class DashboardComponent implements OnInit {
   locationFormGroup!: FormGroup;
-  locations!: WeatherResult[];
+  locations!: WeatherResult<WeatherApiResponse>[];
 
   private _subscriptions = new Subscription();
 
   constructor(
     private _fb: FormBuilder,
     private _cdr: ChangeDetectorRef,
+    private _router: Router,
     private _dashboardService: DashboardService
   ) {}
 
@@ -38,6 +41,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnDestroy() {
     this._subscriptions.unsubscribe();
+  }
+
+  navigateToForecast(zipcode: string) {
+    this._router.navigate(['forecast', zipcode]);
   }
 
   addLocation() {
@@ -61,7 +68,7 @@ export class DashboardComponent implements OnInit {
     this.locations = [...this._dashboardService.deleteLocation(zipcode)];
   }
 
-  trackByZipcode(index: number, item: WeatherResult) {
+  trackByZipcode(index: number, item: WeatherResult<WeatherApiResponse>) {
     return item.zipcode;
   }
 }

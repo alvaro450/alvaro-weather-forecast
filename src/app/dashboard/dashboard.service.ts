@@ -1,22 +1,23 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { tap } from "rxjs/operators";
-import { LocalStorageService } from "../shared/services/local-storage.service";
-import { WeatherResult } from "../shared/models/weather.model";
-import { WeatherApiService } from "../shared/services/weather-api.service";
+import { LocalStorageService } from "../core/services/local-storage.service";
+import { WeatherResult } from "../core/models/weather.model";
+import { WeatherApiService } from "../core/services/weather-api.service";
+import { WeatherApiResponse } from "../core/interfaces/weather-api-response.interfaces";
 
 @Injectable({ providedIn: "root" })
 export class DashboardService {
   private _storageKey = "alvaro::weather::key";
   private _uniqueLocations = new Set<string>();
-  private _locations: WeatherResult[] = [];
+  private _locations: WeatherResult<WeatherApiResponse>[] = [];
 
   constructor(
     private _weatherApiService: WeatherApiService,
     private _localStorageService: LocalStorageService
   ) {}
 
-  addLocation(zipcode: string): Observable<WeatherResult | null> {
+  addLocation(zipcode: string): Observable<WeatherResult<WeatherApiResponse> | null> {
     if (this._uniqueLocations.has(zipcode)) {
       return of(null);
     }
@@ -45,11 +46,11 @@ export class DashboardService {
   getStoredLocations() {
     const storedLocations = this._localStorageService.get(
       this._storageKey
-    ) as WeatherResult[];
-    if (!!storedLocations) {
+    ) as WeatherResult<WeatherApiResponse>[];
+    if (!!storedLocations && this._uniqueLocations.size === 0) {
       // populate the private properties
       storedLocations.forEach(storedLocation => {
-        this._uniqueLocations.add(storedLocation.zipcode);
+        this._uniqueLocations.add(storedLocation.zipcode as string);
         this._locations.push(storedLocation);
       });
     }

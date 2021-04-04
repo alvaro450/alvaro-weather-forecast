@@ -1,0 +1,8 @@
+<div>
+{{ forecastData.dateText | day }}: {{ forecastData.weatherCollection[0].name }} - 
+High: {{ forecastData.temperature.max }} - Low: {{ forecastData.temperature.min}}
+</div>
+<div>
+  <img class="forecast-info-image" alt="weather image" [src]="forecastData.weatherCollection[0].image" />
+</div>
+

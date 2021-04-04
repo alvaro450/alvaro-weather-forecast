@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .forecast-info-image {
+    width: 40px;
+    height: 40px;
+  }
+}

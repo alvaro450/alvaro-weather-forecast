@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { ForecastGuard } from "./forecast/forecast.guard";
+import { ForecastResolver } from './forecast/forecast.resolver';
 
 // Both of the available paths are lazy loaded
 const ROUTES: Routes = [
@@ -10,6 +12,10 @@ const ROUTES: Routes = [
   },
   {
     path: "forecast/:zipcode",
+    resolve: {
+      forecast: ForecastResolver
+    },
+    canActivate: [ForecastGuard],
     loadChildren: () =>
       import("./forecast/forecast.module").then(m => m.ForecastModule)
   },

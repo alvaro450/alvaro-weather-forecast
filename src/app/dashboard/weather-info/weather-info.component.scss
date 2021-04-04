@@ -16,6 +16,15 @@
       margin: 0;
     }
   }
+
+  .forecast-link {
+    color: blue;
+    cursor: pointer;
+
+    &:hover {
+      color: darkblue;
+    }
+  }
   .remove-button {
     position: relative;
     top: -30px;

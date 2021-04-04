@@ -2,18 +2,32 @@
   <mat-card-header>
     <mat-card-title>Add a location</mat-card-title>
   </mat-card-header>
-  
+
   <mat-card-content>
-    <form [formGroup]="locationFormGroup" (keydown.enter)="addLocation()" (submit)="addLocation()">
+    <form
+      [formGroup]="locationFormGroup"
+      (keydown.enter)="addLocation()"
+      (submit)="addLocation()"
+    >
       <mat-form-field>
         <mat-label for="zipcodeInput">Enter a zipcode</mat-label>
-        <input id="zipcodeInput" matInput type="text" formControlName="zipcode" placeholder="zipcode"/>
+        <input
+          id="zipcodeInput"
+          matInput
+          type="text"
+          formControlName="zipcode"
+          placeholder="zipcode"
+        />
       </mat-form-field>
-      <button type="submit" mat-button color="primary" >Add Location </button>
+      <button type="submit" mat-button color="primary">Add Location</button>
     </form>
   </mat-card-content>
 </mat-card>
 
 <ng-container *ngFor="let location of locations; trackBy: trackByZipcode">
-  <weather-info [weatherResult]="location" (remove)="deleteLocation($event)"></weather-info>
+  <weather-info
+    [weatherResult]="location"
+    (forecast)="navigateToForecast($event)"
+    (remove)="deleteLocation($event)"
+  ></weather-info>
 </ng-container>

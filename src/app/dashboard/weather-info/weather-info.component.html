@@ -1,6 +1,9 @@
 <mat-card class="mat-elevation-z4">
   <mat-card-header class="weather-info-header">
-    <mat-card-title>{{weatherResult.city}}</mat-card-title>
+    <mat-card-title>
+      {{weatherResult.city}}
+      <a  class="forecast-link" (click)="forecastInfo($event, weatherResult.zipcode)" >(See 5 Day Forecast)</a>
+    </mat-card-title>
     <button mat-mini-fab color="primary" aria-label="Remove button" class="remove-button" type="button" (click)="removeWeatherInfo(weatherResult.zipcode)"> X </button>
   </mat-card-header>
 
